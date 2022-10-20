@@ -30,11 +30,11 @@ int main() {
       }  */ 
 
   for (int row = 0; row < nRows; row++){
-    int smallest = 0;
-    for(int col = 1; col < nCols; col++){
-      if (grades[row][col] > smallest)
-        grades[row][col] = smallest;
-      
+    int smallest = grades[row][1];
+    for(int col = 1; col < 5; col++){
+      if (grades[row][col] <= smallest)
+         smallest = grades[row][col];
+      grades[row][7] = smallest;
     }
   }
 
