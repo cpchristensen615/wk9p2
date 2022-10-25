@@ -31,12 +31,29 @@ int main() {
 
   for (int row = 0; row < nRows; row++){
     int smallest = grades[row][1];
+    int smallPlace = 0;
     for(int col = 1; col < 5; col++){
-      if (grades[row][col] <= smallest)
-         smallest = grades[row][col];
-      grades[row][7] = smallest;
+      if (grades[row][col] < smallest){
+        smallest = grades[row][col];
+        smallPlace = smallPlace + 1;
+      }
+      // grades[row][7] = smallPlace;
     }
-  }
+    int n = 0;
+    double arr[3] = {0};
+    double sum = 0;
+    double avg = 0;
+    for (int col = 1; col < 5; col++){
+      if ((col-1) != smallPlace){
+        sum = sum + grades[row][col];
+      }
+    }
+    avg = sum / 3;
+    // cout << avg << endl;
+    grades[row][7] = avg;
+    
+    
+}
 
   
   assignAvgGrd(grades, nRows);

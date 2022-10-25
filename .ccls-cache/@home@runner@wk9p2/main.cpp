@@ -4,17 +4,17 @@
 using namespace std;
 
 // declare functions
-void printMatrix(double grades[60][7], int nRows, int nCols);
+void printMatrix(double grades[60][8], int nRows, int nCols);
 void printLabels(string title);
-void assignAvgGrd(double grades[60][7], int nRows);
-void assignWgtGrd(double grades[60][7], int nRows);
+void assignAvgGrd(double grades[60][8], int nRows);
+void assignWgtGrd(double grades[60][8], int nRows);
 
 int main() {
   const int nRows = 60;
-  const int nCols = 7;
+  const int nCols = 8;
   string title;
   
-  double grades[60][7] = { {1, 100, 100, 100, 100},
+  double grades[60][8] = { {1, 100, 100, 100, 100},
                            {2, 100, 0, 100, 0},
                            {3, 82, 94, 73, 86},
                            {4, 64, 74, 84, 94},
@@ -28,6 +28,33 @@ int main() {
           grades[row][col] = temp;
         }
       }  */ 
+
+  for (int row = 0; row < nRows; row++){
+    int smallest = grades[row][1];
+    int smallPlace = 0;
+    for(int col = 1; col < 5; col++){
+      if (grades[row][col] < smallest){
+        smallest = grades[row][col];
+        smallPlace = smallPlace + 1;
+      }
+      // grades[row][7] = smallPlace;
+    }
+    int n = 0;
+    double arr[3] = {0};
+    double sum = 0;
+    double avg = 0;
+    for (int col = 1; col < 5; col++){
+      if ((col-1) != smallPlace){
+        sum = sum + grades[row][col];
+      }
+    }
+    avg = sum / 3;
+    // cout << avg << endl;
+    grades[row][7] = avg;
+    
+    
+}
+
   
   assignAvgGrd(grades, nRows);
   assignWgtGrd(grades, nRows);
@@ -36,7 +63,7 @@ int main() {
 }
 
 /************** FUNCTIONS **************/
-void printMatrix(double grades[60][7], int nRows, int nCols){
+void printMatrix(double grades[60][8], int nRows, int nCols){
     int row, col;
     for (row = 0; row < nRows; row++)
     {
@@ -48,7 +75,7 @@ void printMatrix(double grades[60][7], int nRows, int nCols){
 }
 
 void printLabels(string title){
-  for (int n = 1; n <= 7; n++){
+  for (int n = 1; n <= 8; n++){
     if (n == 1)
       title = "StuNum";
     else if (n == 2)
@@ -63,12 +90,14 @@ void printLabels(string title){
       title = "Avg Grd";
     else if (n == 7)
       title = "Wgt Grd";
+    else if (n == 8)
+      title = "AvgTop3";
     cout << setw(8) << title << " ";
   }
   cout << endl;
 }
 
-void assignAvgGrd(double grades[60][7], int nRows){
+void assignAvgGrd(double grades[60][8], int nRows){
     for (int row = 0; row < nRows; row++){
       double sum = 0;
       double avg = 0;
@@ -79,10 +108,14 @@ void assignAvgGrd(double grades[60][7], int nRows){
     }
 }
 
-void assignWgtGrd(double grades[60][7], int nRows){
+void assignWgtGrd(double grades[60][8], int nRows){
     for (int row = 0; row < nRows; row++){
       double WgtGrd = 0;
         WgtGrd = ( (.2 * grades[row][1]) + (.3 * grades[row][2]) + (.3 * grades[row][3]) + (.2 * grades[row][4]));
       grades[row][6] = WgtGrd;
     }
+}
+
+void assignAvgTop3(){
+    
 }
